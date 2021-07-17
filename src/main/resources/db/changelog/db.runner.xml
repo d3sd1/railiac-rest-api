@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="db.changelog-master.xml" xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!-- V0 -->
+    <include file="version/v0/fix.hibernate.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/schema.languages.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/insert.languages.xml" relativeToChangelogFile="true"/>
+
+    <include file="version/v0/schema.user-and-permissions.xml" relativeToChangelogFile="true"/>
+
+    <include file="version/v0/schema.jwt.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/schema.filter_jwt_configs.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/schema.filter_role_configs.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/insert.roles.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/insert.filter_jwt_exclusions.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/insert.filter_role_inclusions.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/schema.tickets.xml" relativeToChangelogFile="true"/>
+    <include file="version/v0/insert.validate_user.xml" relativeToChangelogFile="true"/>
+    <!-- V0.5 -->
+    <include file="version/v1/schema_upd.user.xml" relativeToChangelogFile="true"/>
+    <include file="version/v1/schema.point_transaction.xml" relativeToChangelogFile="true"/>
+    <include file="version/v1/schema_upd.point_transaction.xml" relativeToChangelogFile="true"/>
+    <include file="version/v1/insert.filter_jwt_exclusions_v2.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

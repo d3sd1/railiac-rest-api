@@ -1,0 +1,35 @@
+# This is a sample build configuration for Java (Maven).
+# Check our guides at https://confluence.atlassian.com/x/zd-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: maven:3.6.1-jdk-11
+
+pipelines:
+  default:
+    - step:
+        script:
+          - mvn package -Dmaven.test.skip=true
+        artifacts:
+          - "target/rest-0.0.1-SNAPSHOT.jar"
+          - "pipeline.sh"
+    - step:
+        deployment: test
+        name: niapadeploy
+        image: atlassian/default-image:2
+        script:
+          - "ssh $SFTP_USER@$SFTP_HOST rm -rf /docker/railiac/rlc-rest/app"
+          - "ssh $SFTP_USER@$SFTP_HOST mkdir -p /docker/railiac/rlc-rest/app"
+          - pipe: atlassian/sftp-deploy:0.5.2
+            variables:
+              USER: $SFTP_USER
+              SERVER: $SFTP_HOST
+              REMOTE_PATH: "/docker/railiac/rlc-rest/app"
+              LOCAL_PATH: 'target/rest-0.0.1-SNAPSHOT.jar'
+              DEBUG: 'true'
+          - pipe: atlassian/sftp-deploy:0.5.2
+            variables:
+              USER: $SFTP_USER
+              SERVER: $SFTP_HOST
+              REMOTE_PATH: "/docker/railiac/rlc-rest/app"
+              LOCAL_PATH: 'pipeline.sh'
